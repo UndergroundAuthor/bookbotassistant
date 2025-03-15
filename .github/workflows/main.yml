@@ -1,0 +1,24 @@
+name: Run BookBot
+
+on:
+  schedule:
+    - cron: "0 10 * * *"  # Runs daily at 10 AM UTC (change this if needed)
+  workflow_dispatch:
+
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v3
+        with:
+          python-version: "3.x"
+
+      - name: Install dependencies
+        run: pip install requests
+
+      - name: Run BookBot
+        run: python main.py
